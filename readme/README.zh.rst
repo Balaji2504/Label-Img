@@ -1,151 +1,197 @@
-# LabelImg
+LabelImg
+========
 
-[![PyPI Version](https://img.shields.io/pypi/v/labelimg.svg)](https://pypi.python.org/pypi/labelimg)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/tzutalin/labelImg/Package?style=for-the-badge)](https://github.com/tzutalin/labelImg)
-[![Language English](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/tzutalin/labelImg)
-[![Language Chinese](https://img.shields.io/badge/lang-zh-green.svg)](https://github.com/tzutalin/labelImg/blob/master/readme/README.zh.rst)
-[![Language Japanese](https://img.shields.io/badge/lang-jp-green.svg)](https://github.com/tzutalin/labelImg/blob/master/readme/README.jp.rst)
+.. image:: https://img.shields.io/pypi/v/labelimg.svg
+        :target: https://pypi.python.org/pypi/labelimg
 
-LabelImg is an image annotation tool written in Python and QT.
+.. image:: https://img.shields.io/github/workflow/status/tzutalin/labelImg/Package?style=for-the-badge   :alt: GitHub Workflow Status
 
-Supported annotation formats include PASCAL VOC format, YOLO, and createML.
+.. image:: https://img.shields.io/badge/lang-en-blue.svg
+        :target: https://github.com/tzutalin/labelImg
 
-![Demo Image](https://raw.githubusercontent.com/tzutalin/labelImg/master/demo/demo3.jpg)
-![Demo Image](https://raw.githubusercontent.com/tzutalin/labelImg/master/demo/demo.jpg)
+.. image:: https://img.shields.io/badge/lang-zh-green.svg
+        :target: https://github.com/tzutalin/labelImg/blob/master/readme/README.zh.rst
 
-[Demo Video](https://youtu.be/p0nR2YsCY_U)
+.. image:: https://img.shields.io/badge/lang-jp-green.svg
+        :target: https://github.com/tzutalin/labelImg/blob/master/readme/README.jp.rst
 
----
+.. image:: /resources/icons/app.png
+    :width: 200px
+    :align: center
 
-## Installation
+LabelImg 是影像標註工具，它是用python 和 QT 寫成的.
 
-### Install from Source Code
+支持的儲存格式包括PASCAL VOC format, YOLO, createML.
 
-#### Linux/Ubuntu/Mac
+.. image:: https://raw.githubusercontent.com/tzutalin/labelImg/master/demo/demo3.jpg
+     :alt: Demo Image
 
-Requires Python and [PyQt5](https://pypi.org/project/PyQt5/).
+.. image:: https://raw.githubusercontent.com/tzutalin/labelImg/master/demo/demo.jpg
+     :alt: Demo Image
 
-##### Ubuntu Linux
+`展示影片 <https://youtu.be/p0nR2YsCY_U>`__
 
-```bash
-sudo apt-get install pyqt5-dev-tools
-sudo pip3 install -r requirements/requirements-linux-python3.txt
-make qt5py3
-python3 labelImg.py
-python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+安裝
+------------------
 
-### macOS
-----------
 
-brew install qt  # Install qt-5.x.x via Homebrew
-brew install libxml2
+透過編譯原始碼
+~~~~~~~~~~~~~~~~~
 
-# Or use pip
-pip3 install pyqt5 lxml
+Linux/Ubuntu/Mac 需要 Python 和 `PyQt <https://pypi.org/project/PyQt5/>`__
 
-make qt5py3
-python3 labelImg.py
-python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
----------------
-Python 3 Virtualenv (Recommended)
------------------------------------
-brew install python3
-pip3 install pipenv
-pipenv run pip install pyqt5==5.15.2 lxml
-pipenv run make qt5py3
-pipenv run python3 labelImg.py
-# [Optional]
-rm -rf build dist
-python setup.py py2app -A
-mv "dist/labelImg.app" /Applications
-------------------------------------
+Ubuntu Linux
+^^^^^^^^^^^^
+
+Python 3 + Qt5
+
+.. code:: shell
+
+    sudo apt-get install pyqt5-dev-tools
+    sudo pip3 install -r requirements/requirements-linux-python3.txt
+    make qt5py3
+    python3 labelImg.py
+    python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+
+macOS
+^^^^^
+
+Python 3 + Qt5
+
+.. code:: shell
+
+    brew install qt  # Install qt-5.x.x by Homebrew
+    brew install libxml2
+
+    or using pip
+
+    pip3 install pyqt5 lxml # Install qt and lxml by pip
+
+    make qt5py3
+    python3 labelImg.py
+    python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+
+
+Python 3 Virtualenv (推薦方法)
+
+Virtualenv 可以避免版本和相依性問題
+
+.. code:: shell
+
+    brew install python3
+    pip3 install pipenv
+    pipenv run pip install pyqt5==5.15.2 lxml
+    pipenv run make qt5py3
+    pipenv run python3 labelImg.py
+    [Optional] rm -rf build dist; python setup.py py2app -A;mv "dist/labelImg.app" /Applications
+
 
 Windows
-Install Python, PyQt5, and lxml.
+^^^^^^^
 
-Navigate to the labelImg directory and run:
-pyrcc4 -o libs/resources.py resources.qrc
-# For pyqt5
-pyrcc5 -o libs/resources.py resources.qrc
+安裝 `Python <https://www.python.org/downloads/windows/>`__,
+`PyQt5 <https://www.riverbankcomputing.com/software/pyqt/download5>`__
+和 `install lxml <http://lxml.de/installation.html>`__.
 
-python labelImg.py
-python labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
----------------------------------------------------------
+安裝並到 `labelImg <#labelimg>`__ 目錄
+
+.. code:: shell
+
+    pyrcc4 -o libs/resources.py resources.qrc
+    For pyqt5, pyrcc5 -o libs/resources.py resources.qrc
+
+    python labelImg.py
+    python labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+
 Windows + Anaconda
-Download and install Anaconda (Python 3+).
+^^^^^^^^^^^^^^^^^^
 
-Open Anaconda Prompt, navigate to the labelImg directory, and run:
-conda install pyqt=5
-conda install -c anaconda lxml
-pyrcc5 -o libs/resources.py resources.qrc
-python labelImg.py
-python labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
----------------------------------------------------------
-Install from PyPI
-Requires Python 3.0 or above.
-pip3 install labelImg
-labelImg
-labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+下載並安裝 `Anaconda <https://www.anaconda.com/download/#download>`__ (Python 3+)
 
--------------------------
+打開 Anaconda Prompt 然後到 `labelImg <#labelimg>`__ 目錄
+
+.. code:: shell
+
+    conda install pyqt=5
+    conda install -c anaconda lxml
+    pyrcc5 -o libs/resources.py resources.qrc
+    python labelImg.py
+    python labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+
+Get from PyPI but only python3.0 or above
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: shell
+
+    pip3 install labelImg
+    labelImg
+    labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+
+
 Use Docker
-docker run -it \
---user $(id -u) \
--e DISPLAY=unix$DISPLAY \
---workdir=$(pwd) \
---volume="/home/$USER:/home/$USER" \
---volume="/etc/group:/etc/group:ro" \
---volume="/etc/passwd:/etc/passwd:ro" \
---volume="/etc/shadow:/etc/shadow:ro" \
---volume="/etc/sudoers.d:/etc/sudoers.d:ro" \
--v /tmp/.X11-unix:/tmp/.X11-unix \
-tzutalin/py2qt4
+~~~~~~~~~~~~~~~~~
+.. code:: shell
 
-make qt4py2
-./labelImg.py
----------------------------------------
-## Usage
+    docker run -it \
+    --user $(id -u) \
+    -e DISPLAY=unix$DISPLAY \
+    --workdir=$(pwd) \
+    --volume="/home/$USER:/home/$USER" \
+    --volume="/etc/group:/etc/group:ro" \
+    --volume="/etc/passwd:/etc/passwd:ro" \
+    --volume="/etc/shadow:/etc/shadow:ro" \
+    --volume="/etc/sudoers.d:/etc/sudoers.d:ro" \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    tzutalin/py2qt4
 
-### Generate Labels
+    make qt4py2;./labelImg.py
 
-To define the labels for annotation, edit the file `data/predefined_classes.txt`.  
-This file contains the list of predefined classes you will use for labeling images. Each line in the file represents one class.
-
-For example:
-
-```txt
-dog
-cat
-car
-person
----------------------------------------
-## Keyboard Shortcuts
-
-Here is a list of keyboard shortcuts to speed up the annotation process:
-
-| Shortcut           | Action                                    |
-|--------------------|------------------------------------------|
-| `Ctrl + U`         | Load all images from a directory         |
-| `Ctrl + R`         | Change the output directory for annotations |
-| `Ctrl + S`         | Save the annotation                      |
-| `Ctrl + D`         | Duplicate the current label and bounding box |
-| `Ctrl + Shift + D` | Delete the current image                 |
-| `Space`            | Mark the current image as verified       |
-| `W`                | Create a new bounding box               |
-| `D`                | Move to the next image                  |
-| `A`                | Move to the previous image              |
-| `Delete`           | Delete the selected bounding box        |
-| `Ctrl + +`         | Zoom in on the image                    |
-| `Ctrl + -`         | Zoom out of the image                   |
-| `↑` `→` `↓` `←`    | Move the selected bounding box          |
------------------------------------------------------------------
-
-Contribution
-Contributions are welcome! Feel free to submit code directly.
+`你可以參考影片  <https://youtu.be/nw1GexJzbCI>`__
 
 
-This version is fully translated into English and formatted as Markdown. Let me know if you need further adjustments!
+使用方法
+-----
 
+你可以先產生標籤
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+修改這個檔案
+`data/predefined\_classes.txt <https://github.com/tzutalin/labelImg/blob/master/data/predefined_classes.txt>`__
 
+快捷鍵
+~~~~~~~
 
++--------------------+--------------------------------------------+
+| Ctrl + u           | 讀取所有影像從每個目錄                     |
++--------------------+--------------------------------------------+
+| Ctrl + r           | 改變標示結果的存檔目錄                     |
++--------------------+--------------------------------------------+
+| Ctrl + s           | 存檔                                       |
++--------------------+--------------------------------------------+
+| Ctrl + d           | 複製目前的標籤和物件的區塊                 |
++--------------------+--------------------------------------------+
+| Ctrl + Shift + d   | 刪除目前影像                               |
++--------------------+--------------------------------------------+
+| Space              | 標示目前照片已經處理過                     |
++--------------------+--------------------------------------------+
+| w                  | 產生新的物件區塊                           |
++--------------------+--------------------------------------------+
+| d                  | 下張影像                                   |
++--------------------+--------------------------------------------+
+| a                  | 上張影像                                   |
++--------------------+--------------------------------------------+
+| del                | 刪除所選的物件區塊                         |
++--------------------+--------------------------------------------+
+| Ctrl++             | 放大影像                                   |
++--------------------+--------------------------------------------+
+| Ctrl--             | 縮小影像                                   |
++--------------------+--------------------------------------------+
+| ↑→↓←               | 移動所選的物件區塊                         |
++--------------------+--------------------------------------------+
+
+如何貢獻
+~~~~~~~~~~~~~~~~~
+
+歡迎上傳程式碼直接貢獻
+
+  
